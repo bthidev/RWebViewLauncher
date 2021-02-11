@@ -1,0 +1,16 @@
+[package]
+name = "webviewTest"
+version = "0.1.0"
+authors = ["speedi57 <thiebaut.benjamin@live.fr>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+web-view = { version = "0.7" }
+futures-lite = "1.11.3"
+async-process = "1.0.2"
+futures = "0.3"
+regex = "1"
+serde = { version = "1.0.104", features = ["derive"] }
+serde_json = "1.0.48"
