@@ -1,5 +1,5 @@
 [package]
-name = "webviewTest"
+name = "web_view_launcher"
 version = "0.1.0"
 authors = ["speedi57 <thiebaut.benjamin@live.fr>"]
 edition = "2018"
