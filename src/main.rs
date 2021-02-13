@@ -31,9 +31,10 @@ async fn hello_world() -> bool {
         )
         .unwrap();
         if re.is_match(&str_out_put) {
+            let result = re.captures(&str_out_put).unwrap();
             web_view::builder()
                 .title(&config.name)
-                .content(Content::Url("http://localhost:5000"))
+                .content(Content::Url(result.get(0).unwrap().as_str()))
                 .size(800, 600)
                 .resizable(true)
                 .debug(true)

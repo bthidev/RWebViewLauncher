@@ -11,11 +11,10 @@
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=webviewTest",
-                    "--package=webviewTest"
+                    "--bin=web_view_launcher",
                 ],
                 "filter": {
-                    "name": "webviewTest",
+                    "name": "web_view_launcher",
                     "kind": "bin"
                 }
             },
