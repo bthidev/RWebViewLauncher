@@ -8,15 +8,19 @@ use regex::Regex;
 use serde::{Deserialize, Serialize};
 use std::fs;
 use web_view::*;
+use std::env;
 
 fn main() {
-    let future = hello_world(); // Nothing is printed
+    let future = main_async(); // Nothing is printed
     block_on(future); // `future` is run and "hello, world!" is printed
 }
-async fn hello_world() -> bool {
-    let contents =
-        fs::read_to_string("./config.json").expect("Something went wrong reading the file");
-    let config: Config = serde_json::from_str(&contents).expect("JSON was not well-formatted");
+fn get_config() -> Config {
+    let contents = fs::read_to_string("./config.json").expect("Something went wrong reading the file");
+    return serde_json::from_str(&contents).expect("JSON was not well-formatted");
+}
+async fn main_async() -> bool {
+    env::set_current_dir("./Data").expect("Folder Data doesn't exist");
+    let config = get_config();
     let mut output = Command::new(config.app_path)
         .stdout(Stdio::piped())
         .spawn()
@@ -52,5 +56,5 @@ async fn hello_world() -> bool {
 #[derive(Serialize, Deserialize)]
 struct Config {
     name: String,
-    app_path:String,
+    app_path: String,
 }
