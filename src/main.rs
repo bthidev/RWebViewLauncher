@@ -1,21 +1,27 @@
 #![windows_subsystem = "windows"]
 extern crate web_view;
-
+use std::path::Path;
 use async_process::{Command, Stdio};
 use futures::executor::block_on;
 use futures_lite::{io::BufReader, prelude::*};
 use regex::Regex;
 use serde::{Deserialize, Serialize};
+use std::env;
 use std::fs;
 use web_view::*;
-use std::env;
 
 fn main() {
+    let args: Vec<String> = env::args().collect();
+    let filename = Path::new(&args[0]);
+    let rawname = filename.parent().unwrap().to_str().unwrap();
+    println!("{}", rawname);
+    env::set_current_dir( rawname).expect("Folder Data doesn't exist");
     let future = main_async(); // Nothing is printed
     block_on(future); // `future` is run and "hello, world!" is printed
 }
 fn get_config() -> Config {
-    let contents = fs::read_to_string("./config.json").expect("Something went wrong reading the file");
+    let contents =
+        fs::read_to_string("./config.json").expect("Something went wrong reading the file");
     return serde_json::from_str(&contents).expect("JSON was not well-formatted");
 }
 async fn main_async() -> bool {
